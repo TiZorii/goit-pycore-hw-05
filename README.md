@@ -72,3 +72,5 @@ You need to create a function called **`generator_numbers`**, which will analyze
 **Task 4**
 
 **Requirements for the task:**
+
+**Recommendations for execution:**
