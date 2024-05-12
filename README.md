@@ -73,4 +73,31 @@ You need to create a function called **`generator_numbers`**, which will analyze
 
 **Requirements for the task:**
 
+- All user input errors should be handled using the **`input_error`** decorator. This decorator is responsible for returning messages to the user such as **`"Enter user name"`**, **`"Give me name and phone please"`**, etc.
+- The **`input_error`** decorator should handle exceptions that occur in functions - **`handler`**, and these exceptions are: **`KeyError`**, **`ValueError`**, **`IndexError`**. When an exception occurs, the decorator should return the corresponding response to the user. The program execution should not be interrupted.
+
 **Recommendations for execution:**
+
+As an example, let's add the **`input_error`** decorator to handle the **`ValueError`** error.
+
+```
+def input_error(func):
+def inner(*args, \*\*kwargs):
+try:
+return func(*args, \*\*kwargs)
+except ValueError:
+return "Give me name and phone please."
+return inner
+```
+
+And wrap the **`add_contact`** function of our bot with the decorator, so that we start handling the **`ValueError`** error.
+
+```
+@input_error
+def add_contact(args, contacts):
+name, phone = args
+contacts[name] = phone
+return "Contact added."
+```
+
+You need to add handlers to other commands (functions) and add exception handling for other types with corresponding messages to the decorator.
